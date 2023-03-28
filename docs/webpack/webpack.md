@@ -106,3 +106,27 @@
 `last-modifined` 表示文件最后修改时间，当浏览器第二次请求资源时，请求头会添加这个过期时间，服务器会将这个时间和文件最后修改时间比较，如果没有变化，说明资源没有变化，于是返回 304 状态码；如果资源有变化，则返回新的资源，状态码为 200。
 
 `etag` 与 `last-modefined`  类似，只不过是一个 `token`，发送请求时比较本地 `token` 与服务器 `token` 是否一致。`etag` 的优先级比 `last-Modefined` 高。
+
+
+
+### CI/CD
+
+- CI：持续集成，包含代码提交和自动化测试
+
+- CD：持续部署，一般指自动化部署
+
+CI/CD 一般指项目的自动化，常见的方案有 Github Actions、Gitlab Runner 和 Jenlins 等。
+
+
+
+### Github Actions
+
+参考：[Github Action自动化部署](https://www.bilibili.com/video/BV1Ca411h7rx/?spm_id_from=333.999.0.0&vd_source=82bae426e35bb536955cd65831b6f5d8)，创建和配置工作流配置文件 `.github/workflows/main.yml`，当 Github 仓库 `push` 新代码时，自动检查 Node 环境，运行安装项目依赖和项目构建命令，并打包上传到服务器，实现自动化部署。
+
+
+
+#### Gitlab Runner
+
+1. 服务器安装 Gitlab Runner
+2. 服务器注册 Gitlab Runner（需要获取 token，token 分为整个平台、团队和项目3个级别）
+3. 项目根目录创建 `.gitlab-ci.yml` 配置文件，指定构建、测试和部署脚本。
