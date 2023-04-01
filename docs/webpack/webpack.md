@@ -20,6 +20,8 @@
 
 - [微信小程序](../mini-program/mini-program.md)
 
+- [计算机网络](../network/network.md)
+
 
 
 ## Webpack
@@ -87,29 +89,7 @@
 
 
 
-## 浏览器缓存
-
-浏览器缓存策略分为**强缓存**和**协商缓存**两种。
-
-### 强缓存
-
-强缓存不会向服务器发请求，而是从缓存中读取资源，强缓存可以通过 response header 的 `expires` 和 `cache-control` 进行控制。
-
-`expires` 表示缓存的过期时间，有个缺点是受本地时间影响，修改本地时间会影响缓存。
-
-`cache-control` 的优先级比 `expires` 高，有多个取值，最常见的是 `max-age`，表示缓存的有效时间，比如 `cache-control: max-age=600` 表示 600 秒后过期。
-
-### 协商缓存
-
-协商缓存就是强制缓存失效后，浏览器携带缓存标识向服务器发起请求，由服务器根据缓存标识决定是否使用缓存的过程。协商缓存可以通过 response header 的 `last-Modifined` 和 `etag` 进行控制。
-
-`last-modifined` 表示文件最后修改时间，当浏览器第二次请求资源时，请求头会添加这个过期时间，服务器会将这个时间和文件最后修改时间比较，如果没有变化，说明资源没有变化，于是返回 304 状态码；如果资源有变化，则返回新的资源，状态码为 200。
-
-`etag` 与 `last-modefined`  类似，只不过是一个 `token`，发送请求时比较本地 `token` 与服务器 `token` 是否一致。`etag` 的优先级比 `last-Modefined` 高。
-
-
-
-### CI/CD
+## CI/CD
 
 - CI：持续集成，包含代码提交和自动化测试
 
@@ -125,8 +105,20 @@ CI/CD 一般指项目的自动化，常见的方案有 Github Actions、Gitlab R
 
 
 
-#### Gitlab Runner
+### Gitlab Runner
 
 1. 服务器安装 Gitlab Runner
 2. 服务器注册 Gitlab Runner（需要获取 token，token 分为整个平台、团队和项目3个级别）
 3. 项目根目录创建 `.gitlab-ci.yml` 配置文件，指定构建、测试和部署脚本。
+
+
+
+## npm 私服
+
+搭建 npm 私服可以提高项目依赖下载速率，也可以管理企业自研的开发包。搭建 npm 私服一般通过 [Verdaccio](https://verdaccio.org/zh-cn/docs/what-is-verdaccio/)。
+
+
+
+## 微前端
+
+微前端借鉴了微服务的概念，将一个庞大的应用拆解成若干个独立开发（技术栈独立）、独立运行、松散耦合的应用。常见的微前端框架有：[qiankun]([qiankun - qiankun (umijs.org)](https://qiankun.umijs.org/zh))、[MicroApp]([MicroApp (micro-zoe.github.io)](https://micro-zoe.github.io/micro-app/))、[无界]([无界 | 极致的微前端框架 (wujie-micro.github.io)](https://wujie-micro.github.io/doc/)) 等。
